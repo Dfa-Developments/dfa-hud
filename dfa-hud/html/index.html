@@ -1,0 +1,106 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/quasar@2.1.0/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.1.0/dist/quasar.umd.prod.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <div id="main-container">
+        <div id="money-container">
+            <div id="money-cash">
+                <transition name="slide-fade">
+            <p v-if="showCash"><span id="sign">$&nbsp;</span><span id="money">{{(cash)}}</span></p>
+                </transition>
+            </div>
+            <div id="money-bloodmoney">
+                <transition name="slide-fade">
+            <p v-if="showBloodmoney"><span id="sign">$&nbsp;</span><span id="bloodmoney">{{(bloodmoney)}}</span></p>
+                </transition>
+            </div>
+            <div id="money-bank">
+                <transition name="slide-fade">
+            <p v-if="showBank"><span id="sign">$&nbsp;</span><span id="bank">{{(bank)}}</span></p>
+                </transition>
+            </div>
+            <div id="money-change" v-if="showUpdate">
+        <p v-if="plus" id="money"><span id="plus">+&nbsp;</span><span id="money">{{(amount)}}</span></p>
+                <p v-else-if="minus" id="minus"><span id="minus">-&nbsp;</span><span id="money">{{(amount)}}</span></p>
+            </div>
+        </div>
+        <span>
+            <div id="ui-container">
+                <div id="playerHud" v-show="show">
+                    <transition name="fade">
+                    <div v-if="showVoice">
+                        <q-circular-progress show-value :value="voice" size="4.00vh" :thickness="0.18" color="white" track-color="black-9" center-color="gray-10" :min="0" :max="100">
+                        <q-circular-progress show-value :value="voice" size="4.00vh" :thickness="0.18" :style="{color: talkingColor}" :min="0" :max="6" center-color="grey-10">
+                        <q-icon name="fas fa-megaphone" size="15px" :style="{color: talkingColor}" />
+                    </div>
+                    </transition>
+                    <!-- <div v-if="showPVP">
+                        <q-circular-progress class="progress" show-value :value="pvp" size="4.00vh" :thickness="0.18" color="black" track-color="black-9" center-color="gray-10">
+                        <q-icon name="fas fa-crosshairs" size="15px" :style="{color: showPVPColor}" />
+                    </div> -->
+                    <div v-if="showoutlawstatus">
+                        <q-circular-progress class="progress" show-value :value="showoutlawstatus" size="4.00vh" :thickness="0.18" color="black" track-color="black-9" center-color="gray-10">
+                        <q-icon name="fas fa-mask" size="15px" :style="{color: showOutLawColor}" />
+                    </div>
+                    <div v-if="showTemp">
+                        <q-circular-progress class="progress" show-value :value="temp" size="4.00vh" :thickness="0.18" color="white" track-color="grey-8" center-color="gray-10">
+                          <template v-slot:default>
+                            <div class="text-white" style="font-family: crock">{{ temp }}</div>
+                          </template>
+                        </q-circular-progress>
+                    </div>
+                    <div v-if="showHealth">
+                        <q-circular-progress class="progress" show-value :value="health" size="4.00vh" :thickness="0.18" color="white" track-color="black-9" center-color="gray-10">
+                        <q-icon name="fas fa-heart-pulse" size="15px" :style="{color: showHealthColor}" />
+                    </div>
+                    <div v-if="showStamina">
+                        <q-circular-progress class="progress" show-value :value="stamina" size="4.00vh" :thickness="0.18" color="white" track-color="black-9" center-color="gray-10">
+                        <q-icon name="fas fa-person-running-fast" size="15px" :style="{color: showStaminaColor}" />
+                    </div>
+                    <div v-if="showHunger">
+                        <q-circular-progress class="progress" show-value :value="hunger" size="4.00vh" :thickness="0.18" color="white" track-color="black-9" center-color="gray-10">
+                        <q-icon name="fas fa-stomach" size="15px" :style="{color: showHungerColor}" />
+                    </div>
+                    <div v-if="showThirst">
+                        <q-circular-progress class="progress" show-value :value="thirst" size="4.00vh" :thickness="0.18" color="white" track-color="black-9" center-color="gray-10">
+                        <q-icon name="fas fa-whiskey-glass-ice" size="15px" :style="{color: showThirstColor}" />
+                    </div>
+                    <div v-if="showCleanliness">
+                        <q-circular-progress class="progress" show-value :value="cleanliness" size="4.00vh" :thickness="0.18" color="white" track-color="black-9" center-color="gray-10">
+                        <q-icon name="fas fa-soap" size="15px" :style="{color: showCleanlinessColor}" />
+                    </div>
+                    <div v-if="showStress">
+                        <q-circular-progress class="progress" show-value :value="stress" size="4.00vh" :thickness="0.18" color="white" track-color="black-9" center-color="gray-10">
+                        <q-icon name="fas fa-head-side-brain" size="15px" color="white" />
+                    </div>
+                    <div v-if="showYouHaveMail">
+                        <q-circular-progress class="progress" show-value :value="youhavemail" size="4.00vh" :thickness="0.18" color="black" track-color="black-9" center-color="gray-10">
+                        <q-icon name="far fa-envelope" size="15px" :style="{color: showYouHaveMailColor}" />
+                    </div>
+                    <div v-if="showHorseHealth">
+                        <q-circular-progress class="progress" show-value :value="horsehealth" size="4.00vh" :thickness="0.18" color="white" track-color="black-9" center-color="gray-10">
+                            <q-icon name="fas fa-horse-head" size="15px" :style="{color: showHorseHealthColor}" />
+                    </div>
+                    <div v-if="showHorseStamina">
+                        <q-circular-progress class="progress" show-value :value="horsestamina" size="4.00vh" :thickness="0.18" color="white" track-color="black-9" center-color="gray-10">
+                            <q-icon name="fas fa-horse-saddle" size="15px" :style="{color: showHorseStaminaColor}" />
+                    </div>
+                    <div v-if="showHorseClean">
+                        <q-circular-progress class="progress" show-value :value="horseclean" size="4.00vh" :thickness="0.18" color="white" track-color="black-9" center-color="gray-10">
+                            <q-icon name="fas fa-soap" size="15px" :style="{color: showHorseStaminaColor}" />
+                    </div>
+                </div>
+            </div>
+        </span>
+    </div>
+</body>
+
+</html>
