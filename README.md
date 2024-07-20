@@ -23,4 +23,4 @@
 - https://github.com/QRCore-RedM-Re/qr-hud
 
 # Preview
-https://cdn.discordapp.com/attachments/930809057231663114/1264088554665934889/Desktop_Screenshot_2024.07.19_-_23.16.05.98.png?ex=669c99b5&is=669b4835&hm=becedac60d4b5c79f3dcad1322ec57a90da9abcafd13ff8b1eff81ce363bc76c&
+https://cdn.discordapp.com/attachments/930809057231663114/1264089159115735150/dfa-hud.png?ex=669c9a45&is=669b48c5&hm=47527399b82f07a1913044853d9e9fa559cb1803a006de2115fb677841b3f81b&
